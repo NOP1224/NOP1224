@@ -65,7 +65,20 @@ This project provides an open-source framework for **pedestrian attribute recogn
 The following table is automatically generated from the default branch history of each repository. It reports project-level contribution statistics instead of relying on unstable third-party GitHub profile images.
 
 <!-- PROJECT-STATS:START -->
-The contribution table will be generated automatically by GitHub Actions.
+_Last updated: 2026-06-30 18:00 JST_
+
+| Project | Role | Contribution Level | Commit Share | Code Change Share | Recent 90-Day Commits | PRs / Issues | Stars / Forks | Last Commit |
+|---|---|---:|---:|---:|---:|---:|---:|---|
+| [Unaligned RGB-T Tracking](https://github.com/NOP1224/Unaligned_RGBT_Tracking) | Lead / Maintainer | Primary | 92 / 94 (97.9%) | 2,710,312 / 2,710,336 (100.0%) | 63 / 65 (96.9%) | 1 / 0 | 24 / 1 | 2026-06-29 20:10:56 +0800 |
+| [OpenPAR](https://github.com/Event-AHU/OpenPAR) | Contributor | Active | 159 / 443 (35.9%) | 34,717 / 112,837 (30.8%) | 0 / 11 (0.0%) | 0 / 0 | 204 / 37 | 2026-06-12 22:14:48 +0800 |
+
+**Metric definition:**
+
+- **Commit Share** = matched author commits / total commits on the default branch.
+- **Code Change Share** = matched author additions and deletions / total additions and deletions on the default branch.
+- **Recent 90-Day Commits** = matched author commits / total commits in the latest 90 days.
+- **PRs / Issues** = pull requests and issues authored by `NOP1224` in the repository.
+- Binary files are ignored in line-change statistics.
 <!-- PROJECT-STATS:END -->
 
 ---
