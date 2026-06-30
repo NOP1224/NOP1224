@@ -1,4 +1,4 @@
-<h1 align="center"> **N** **O** **P** </h1>
+<h1 align="center"> N O P </h1>
 
 <p align="center">
   Unaligned RGB-T Tracking · Multimodal Tracking · Image Matching & Registration · Pedestrian Attribute Recognition
