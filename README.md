@@ -28,7 +28,3 @@
 
 - [**Unaligned_RGBT_Tracking**](https://github.com/NOP1224/Unaligned_RGBT_Tracking): benchmark, dataset, toolkit, baselines, and alignment-aware RGB-T tracking.
 - [**OpenPAR**](https://github.com/Event-AHU/OpenPAR): open-source pedestrian attribute recognition framework and related experiments.
-
-## Contact
-
-GitHub: [NOP1224](https://github.com/NOP1224)
