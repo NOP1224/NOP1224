@@ -116,18 +116,6 @@ My research focuses on **multimodal visual perception under spatial misalignment
 - **OpenPAR Framework**: PyTorch-based open-source framework for pedestrian attribute recognition.
 - **Attribute Recognition Research**: model design and evaluation for pedestrian-centric visual understanding.
 
----
-
-## Repository Activity Commands
-
-To calculate accurate project-level contribution statistics, I use the following Git commands:
-
-```bash
-# Count commits by author
-git shortlog -sne --all
-
-# Count my commits in one repository
-git log --author="Jiandong Jin" --oneline --all | wc -l
 
 # Count total commits
 git rev-list --all --count
