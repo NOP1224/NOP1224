@@ -1,32 +1,32 @@
 <h1 align="center">Jiandong Jin</h1>
 
 <p align="center">
-  Ph.D. Student in Computer Science and Technology  
+  Ph.D. Student · Anhui University  
   <br>
-  Anhui University
-  <br>
-  Research Interests: Unaligned RGB-T Tracking · Multimodal Tracking · Image Matching & Registration · Pedestrian Attribute Recognition
+  Unaligned RGB-T Tracking · Multimodal Tracking · Image Matching & Registration · Pedestrian Attribute Recognition
+</p>
+
+<p align="center">
+  <a href="https://github.com/NOP1224/Unaligned_RGBT_Tracking">Unaligned RGB-T Tracking</a>
+  ·
+  <a href="https://github.com/Event-AHU/OpenPAR">OpenPAR</a>
 </p>
 
 ---
 
-## Research Focus
-
-| Direction | Description |
-|---|---|
-| **Unaligned RGB-T Tracking** | Robust object tracking under RGB/TIR spatial offset, scale variation, platform motion, and modality inconsistency. |
-| **Multimodal Tracking** | Cross-modal fusion, modality-aware representation learning, and efficient tracking architectures. |
-| **Image Matching & Registration** | Cross-modal correspondence, homography/affine alignment, deformable sampling, and alignment-aware fusion. |
-| **Pedestrian Attribute Recognition** | Human-centric visual understanding, attribute recognition, open-source PAR frameworks, and semantic representation learning. |
+<p align="center">
+  <img src="./assets/project_contributions.svg" width="100%" />
+</p>
 
 ---
 
-## Featured Projects
+## Focus
 
-### 1. Unaligned RGB-T Tracking
+`Unaligned RGB-T Tracking` · `Multimodal Alignment` · `Image Registration` · `Pedestrian Attribute Recognition`
 
-Repository: [NOP1224/Unaligned_RGBT_Tracking](https://github.com/NOP1224/Unaligned_RGBT_Tracking)
+## Projects
 
+<<<<<<< Updated upstream
 This project focuses on **unaligned RGB-T object tracking**, including benchmark construction, dataset organization, unified evaluation, baseline integration, and tracking method development.
 
 **My contributions include:**
@@ -80,3 +80,11 @@ _Last updated: 2026-06-30 18:09 JST_
 - **PRs / Issues** = pull requests and issues authored by `NOP1224` in the repository.
 - Binary files are ignored in line-change statistics.
 <!-- PROJECT-STATS:END -->
+=======
+- [**Unaligned_RGBT_Tracking**](https://github.com/NOP1224/Unaligned_RGBT_Tracking): benchmark, dataset, toolkit, baselines, and alignment-aware RGB-T tracking.
+- [**OpenPAR**](https://github.com/Event-AHU/OpenPAR): open-source pedestrian attribute recognition framework and related experiments.
+
+## Contact
+
+GitHub: [NOP1224](https://github.com/NOP1224)
+>>>>>>> Stashed changes

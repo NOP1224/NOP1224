@@ -1,12 +1,9 @@
-name: Update project contribution stats
+name: Update project contribution SVG
 
 on:
   workflow_dispatch:
   schedule:
-    # Every 6 hours.
-    # GitHub cron uses UTC by default.
-    # 05:20 / 11:20 / 17:20 / 23:20 UTC
-    # = 14:20 / 20:20 / 02:20 / 08:20 JST
+    # Every 6 hours. GitHub cron uses UTC.
     - cron: "20 5,11,17,23 * * *"
   push:
     paths:
@@ -31,7 +28,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Generate contribution statistics
+      - name: Generate contribution SVG
         run: python scripts/update_project_stats.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -39,14 +36,14 @@ jobs:
           AUTHOR_REGEX: "NOP1224|Jiandong Jin|Jin Jiandong|jinjiandong|jiandong"
           RECENT_DAYS: "90"
 
-      - name: Commit updated README
+      - name: Commit updated SVG
         run: |
           if [[ -n $(git status --porcelain) ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add README.md
-            git commit -m "Update project contribution stats"
+            git add assets/project_contributions.svg
+            git commit -m "Update project contribution SVG"
             git push
           else
-            echo "No README changes."
+            echo "No SVG changes."
           fi
