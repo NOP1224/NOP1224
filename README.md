@@ -1,105 +1,72 @@
-<h1 align="center">Hi, I'm Jiandong Jin</h1>
+<h1 align="center">Jiandong Jin</h1>
 
 <p align="center">
   Ph.D. Student in Computer Science and Technology  
   <br>
   Anhui University
   <br>
-  Research interests: Unaligned RGB-T Tracking, Multimodal Tracking, Image Matching & Registration, Pedestrian Attribute Recognition
-</p>
-
-<p align="center">
-  <a href="https://github.com/NOP1224">
-    <img src="https://komarev.com/ghpvc/?username=NOP1224&label=Profile%20Views&color=0e75b6&style=flat" />
-  </a>
-  <a href="https://github.com/NOP1224?tab=followers">
-    <img src="https://img.shields.io/github/followers/NOP1224?label=Followers&style=flat" />
-  </a>
+  Research Interests: Unaligned RGB-T Tracking · Multimodal Tracking · Image Matching & Registration · Pedestrian Attribute Recognition
 </p>
 
 ---
 
 ## Research Focus
 
-My research focuses on **multimodal visual perception under spatial misalignment and modality imbalance**.
-
-- **Unaligned RGB-T Tracking**: robust object tracking under RGB/TIR spatial offset, scale variation, and dynamic modality inconsistency.
-- **Multimodal Image Alignment**: homography/affine alignment, cross-modal correspondence, deformable sampling, and registration-aware fusion.
-- **Pedestrian Attribute Recognition**: open-source PAR framework design, attribute representation learning, and multimodal/person-centric recognition.
-- **Efficient Multimodal Tracking**: lightweight fusion, token pruning, dynamic routing, and edge-deployable tracking systems.
+| Direction | Description |
+|---|---|
+| **Unaligned RGB-T Tracking** | Robust object tracking under RGB/TIR spatial offset, scale variation, platform motion, and modality inconsistency. |
+| **Multimodal Tracking** | Cross-modal fusion, modality-aware representation learning, and efficient tracking architectures. |
+| **Image Matching & Registration** | Cross-modal correspondence, homography/affine alignment, deformable sampling, and alignment-aware fusion. |
+| **Pedestrian Attribute Recognition** | Human-centric visual understanding, attribute recognition, open-source PAR frameworks, and semantic representation learning. |
 
 ---
 
 ## Featured Projects
 
-<table>
-<tr>
-<td width="50%">
+### 1. Unaligned RGB-T Tracking
 
-### Unaligned RGB-T Tracking
+Repository: [NOP1224/Unaligned_RGBT_Tracking](https://github.com/NOP1224/Unaligned_RGBT_Tracking)
 
-<a href="https://github.com/NOP1224/Unaligned_RGBT_Tracking">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=NOP1224&repo=Unaligned_RGBT_Tracking&theme=default" />
-</a>
+This project focuses on **unaligned RGB-T object tracking**, including benchmark construction, dataset organization, unified evaluation, baseline integration, and tracking method development.
 
-**Role / Contribution**
+**My contributions include:**
 
-- Lead contributor / maintainer
-- Benchmark construction for unaligned RGB-T tracking
-- Dataset release, evaluation toolkit, tracking baselines
-- Progressive alignment and multimodal fusion methods
+- Building and maintaining the unaligned RGB-T tracking project.
+- Organizing benchmark resources, datasets, tracking results, and evaluation protocols.
+- Integrating representative RGB-T and single-modal tracking baselines.
+- Developing alignment-aware tracking methods for RGB/TIR spatial misalignment.
+- Maintaining documentation, release notes, and open-source resources.
 
-**Research Keywords**
-
-`RGB-T Tracking` · `Unaligned Tracking` · `Multimodal Alignment` · `Homography` · `Deformable Attention`
-
-</td>
-<td width="50%">
-
-### OpenPAR
-
-<a href="https://github.com/Event-AHU/OpenPAR">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Event-AHU&repo=OpenPAR&theme=default" />
-</a>
-
-**Role / Contribution**
-
-- Contributor to open-source PAR framework
-- Pedestrian attribute recognition research
-- Dataset/model/evaluation support
-- Attribute-level representation and recognition experiments
-
-**Research Keywords**
-
-`Pedestrian Attribute Recognition` · `OpenPAR` · `PyTorch` · `Human-Centric Vision`
-
-</td>
-</tr>
-</table>
+**Keywords:**  
+`Unaligned RGB-T Tracking` · `RGB-T Tracking` · `Multimodal Alignment` · `Homography` · `Deformable Attention` · `UAV Tracking`
 
 ---
 
-## Project Contribution Dashboard
+### 2. OpenPAR
 
-> The following table summarizes my main contributions to the two representative projects.
+Repository: [Event-AHU/OpenPAR](https://github.com/Event-AHU/OpenPAR)
 
-| Project | My Role | Main Contributions | Activity Level | Contribution Estimate |
-|---|---|---|---|---|
-| [Unaligned_RGBT_Tracking](https://github.com/NOP1224/Unaligned_RGBT_Tracking) | Lead contributor / maintainer | Dataset, benchmark, evaluation toolkit, baseline integration, tracking method implementation, README/documentation | High | To be updated by commit/PR statistics |
-| [OpenPAR](https://github.com/Event-AHU/OpenPAR) | Contributor | PAR framework support, model/evaluation components, research experiments, documentation | Medium / High | To be updated by commit/PR statistics |
+This project provides an open-source framework for **pedestrian attribute recognition**, including model implementation, dataset support, evaluation tools, and research-oriented extensions.
+
+**My contributions include:**
+
+- Contributing to the open-source pedestrian attribute recognition framework.
+- Supporting model implementation, evaluation, and experimental organization.
+- Participating in human-centric recognition and attribute representation research.
+- Maintaining code and documentation related to PAR experiments and usage.
+
+**Keywords:**  
+`Pedestrian Attribute Recognition` · `Human-Centric Vision` · `OpenPAR` · `PyTorch` · `Attribute Recognition`
 
 ---
 
-## Activity & Maintenance
+## Project Contribution & Activity
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=NOP1224&show_icons=true&count_private=true&hide_title=false&theme=default" height="170" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=NOP1224&layout=compact&theme=default" height="170" />
-</p>
+The following table is automatically generated from the default branch history of each repository. It reports project-level contribution statistics instead of relying on unstable third-party GitHub profile images.
 
-<p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=NOP1224&theme=github-compact" />
-</p>
+<!-- PROJECT-STATS:START -->
+The contribution table will be generated automatically by GitHub Actions.
+<!-- PROJECT-STATS:END -->
 
 ---
 
@@ -107,19 +74,45 @@ My research focuses on **multimodal visual perception under spatial misalignment
 
 ### Unaligned RGB-T Tracking
 
-- **MUART244 Benchmark**: a large-scale benchmark for unaligned RGB-T tracking.
-- **Progressive Multi-cue Alignment**: progressive center-offset, scale transformation, and global refinement for unaligned multimodal tracking.
-- **Unified Evaluation Toolkit**: evaluation support for aligned and unaligned RGB-T tracking settings.
+- Large-scale unaligned RGB-T tracking benchmark construction.
+- Unified evaluation toolkit for aligned and unaligned RGB-T tracking.
+- Progressive alignment and registration-aware fusion methods.
+- Empirical analysis of RGB/TIR spatial offset, scale variation, and tracking degradation.
 
 ### Pedestrian Attribute Recognition
 
-- **OpenPAR Framework**: PyTorch-based open-source framework for pedestrian attribute recognition.
-- **Attribute Recognition Research**: model design and evaluation for pedestrian-centric visual understanding.
+- Open-source pedestrian attribute recognition framework support.
+- Model and evaluation components for human-centric visual recognition.
+- Research on semantic representation learning for pedestrian attributes.
 
+---
 
-# Count total commits
-git rev-list --all --count
+## Technical Stack
 
-# Count added/deleted lines by author
-git log --author="Jiandong Jin" --pretty=tformat: --numstat \
-  | awk '{ add += $1; del += $2 } END { print "Added:", add, "Deleted:", del }'
+| Category | Tools / Frameworks |
+|---|---|
+| Programming | Python, C/C++, MATLAB |
+| Deep Learning | PyTorch, TorchVision, timm |
+| Vision Tasks | Object Tracking, RGB-T Tracking, Image Matching, Registration, Pedestrian Attribute Recognition |
+| Research Tools | Git, LaTeX, OpenCV, NumPy, Pandas |
+| Benchmarking | Tracking evaluation, dataset organization, result analysis, visualization |
+
+---
+
+## Repository Maintenance
+
+I maintain and contribute to research-oriented repositories involving:
+
+- Dataset release and benchmark construction.
+- Baseline tracker integration.
+- Evaluation toolkit development.
+- Model training and testing scripts.
+- Experimental analysis and visualization.
+- Documentation and reproducible research resources.
+
+---
+
+## Contact
+
+- GitHub: [NOP1224](https://github.com/NOP1224)
+- Research Topics: Unaligned RGB-T Tracking, Multimodal Tracking, Image Matching & Registration, Pedestrian Attribute Recognition
