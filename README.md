@@ -1,8 +1,6 @@
-<h1 align="center">Jiandong Jin</h1>
+<h1 align="center"> **N** **O** **P** </h1>
 
 <p align="center">
-  Ph.D. Student · Anhui University  
-  <br>
   Unaligned RGB-T Tracking · Multimodal Tracking · Image Matching & Registration · Pedestrian Attribute Recognition
 </p>
 
