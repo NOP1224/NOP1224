@@ -6,7 +6,6 @@ import re
 import shutil
 import subprocess
 import tempfile
-import urllib.parse
 import urllib.request
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
@@ -17,23 +16,24 @@ REPOS = [
         "name": "Unaligned RGB-T Tracking",
         "full": "NOP1224/Unaligned_RGBT_Tracking",
         "role": "Lead / Maintainer",
-        "color": "#2F80ED",
+        "color": "#0969DA",
+        "accent": "#DDF4FF",
     },
     {
         "name": "OpenPAR",
         "full": "Event-AHU/OpenPAR",
         "role": "Contributor",
-        "color": "#27AE60",
+        "color": "#1A7F37",
+        "accent": "#DAFBE1",
     },
 ]
 
-GITHUB_USERNAME = os.getenv("GITHUB_USERNAME", "NOP1224")
 AUTHOR_REGEX = os.getenv(
     "AUTHOR_REGEX",
     r"NOP1224|Jiandong Jin|Jin Jiandong|jinjiandong|jiandong",
 )
+
 AUTHOR_RE = re.compile(AUTHOR_REGEX, re.IGNORECASE)
-RECENT_DAYS = int(os.getenv("RECENT_DAYS", "90"))
 
 OUT_DIR = Path("assets")
 OUT_SVG = OUT_DIR / "project_contributions.svg"
@@ -87,13 +87,11 @@ def clone_repo(repo_full, dst):
     ])
 
 
-def count_commits(repo_dir, since=None):
-    args = ["git", "log", "--format=%H%x00%an%x00%ae"]
-
-    if since is not None:
-        args.append(f"--since={since}")
-
-    out = run(args, cwd=repo_dir)
+def count_commits(repo_dir):
+    out = run(
+        ["git", "log", "--format=%H%x00%an%x00%ae"],
+        cwd=repo_dir,
+    )
 
     if not out:
         return 0, 0
@@ -145,7 +143,7 @@ def count_line_changes(repo_dir):
 
         add, delete = parts[0], parts[1]
 
-        # Binary files appear as "-"
+        # Binary files are shown as "-"
         if not add.isdigit() or not delete.isdigit():
             continue
 
@@ -186,38 +184,17 @@ def github_json(api_path):
         return {}
 
 
-def github_search_count(query):
-    encoded = urllib.parse.urlencode({"q": query, "per_page": 1})
-    data = github_json(f"/search/issues?{encoded}")
-    return int(data.get("total_count", 0) or 0)
-
-
 def get_repo_meta(repo_full):
     data = github_json(f"/repos/{repo_full}")
 
     return {
         "stars": int(data.get("stargazers_count", 0) or 0),
         "forks": int(data.get("forks_count", 0) or 0),
-        "open_issues": int(data.get("open_issues_count", 0) or 0),
     }
 
 
-def get_github_activity(repo_full):
-    my_prs = github_search_count(
-        f"repo:{repo_full} type:pr author:{GITHUB_USERNAME}"
-    )
-    my_issues = github_search_count(
-        f"repo:{repo_full} type:issue author:{GITHUB_USERNAME}"
-    )
-
-    return {
-        "my_prs": my_prs,
-        "my_issues": my_issues,
-    }
-
-
-def contribution_level(commit_rate, change_rate, recent_rate):
-    score = 0.50 * commit_rate + 0.30 * change_rate + 0.20 * recent_rate
+def contribution_level(commit_rate, change_rate):
+    score = 0.65 * commit_rate + 0.35 * change_rate
 
     if score >= 70:
         return "Primary"
@@ -236,37 +213,29 @@ def collect_repo_stats(repo):
         clone_repo(repo["full"], repo_dir)
 
         my_commits, total_commits = count_commits(repo_dir)
-        my_recent, total_recent = count_commits(repo_dir, since=f"{RECENT_DAYS}.days")
         my_change, total_change = count_line_changes(repo_dir)
 
         latest_time = latest_commit_time(repo_dir)
         meta = get_repo_meta(repo["full"])
-        activity = get_github_activity(repo["full"])
 
         commit_rate = pct(my_commits, total_commits)
         change_rate = pct(my_change, total_change)
-        recent_rate = pct(my_recent, total_recent)
 
         return {
             "name": repo["name"],
             "full": repo["full"],
             "role": repo["role"],
             "color": repo["color"],
+            "accent": repo["accent"],
             "my_commits": my_commits,
             "total_commits": total_commits,
             "commit_rate": commit_rate,
             "my_change": my_change,
             "total_change": total_change,
             "change_rate": change_rate,
-            "my_recent": my_recent,
-            "total_recent": total_recent,
-            "recent_rate": recent_rate,
-            "level": contribution_level(commit_rate, change_rate, recent_rate),
+            "level": contribution_level(commit_rate, change_rate),
             "stars": meta["stars"],
             "forks": meta["forks"],
-            "open_issues": meta["open_issues"],
-            "my_prs": activity["my_prs"],
-            "my_issues": activity["my_issues"],
             "latest_time": latest_time,
         }
 
@@ -275,57 +244,111 @@ def fmt_int(x):
     return f"{int(x):,}"
 
 
-def bar(x, y, width, height, rate, color, label, value):
+def progress_bar(x, y, width, height, rate, color, label, value):
     rate = max(0.0, min(100.0, rate))
     fill_w = width * rate / 100.0
 
     return f"""
-    <text x="{x}" y="{y - 8}" class="label">{esc(label)}</text>
-    <text x="{x + width}" y="{y - 8}" text-anchor="end" class="value">{esc(value)}</text>
-    <rect x="{x}" y="{y}" width="{width}" height="{height}" rx="7" fill="#EAECEF"/>
-    <rect x="{x}" y="{y}" width="{fill_w:.1f}" height="{height}" rx="7" fill="{color}"/>
+    <text x="{x}" y="{y - 10}" class="label">{esc(label)}</text>
+    <text x="{x + width}" y="{y - 10}" text-anchor="end" class="bar-value">{esc(value)}</text>
+
+    <rect x="{x}" y="{y}" width="{width}" height="{height}" rx="8" fill="#EAECEF"/>
+    <rect x="{x}" y="{y}" width="{fill_w:.1f}" height="{height}" rx="8" fill="{color}"/>
+    """
+
+
+def metric_pill(x, y, w, label, value, color="#24292F", bg="#F6F8FA"):
+    return f"""
+    <rect x="{x}" y="{y}" width="{w}" height="42" rx="21" fill="{bg}" stroke="#D0D7DE"/>
+    <text x="{x + 20}" y="{y + 26}" class="pill-label">{esc(label)}</text>
+    <text x="{x + w - 18}" y="{y + 27}" text-anchor="end" class="pill-value" fill="{color}">{esc(value)}</text>
     """
 
 
 def repo_card(repo, x, y, w, h):
     color = repo["color"]
-    repo_url = f"https://github.com/{repo['full']}"
+    accent = repo["accent"]
 
     commit_value = (
         f"{repo['my_commits']}/{repo['total_commits']} "
         f"({repo['commit_rate']:.1f}%)"
     )
+
     change_value = (
         f"{fmt_int(repo['my_change'])}/{fmt_int(repo['total_change'])} "
         f"({repo['change_rate']:.1f}%)"
     )
-    recent_value = (
-        f"{repo['my_recent']}/{repo['total_recent']} "
-        f"({repo['recent_rate']:.1f}%)"
-    )
+
+    contribution_value = f"{repo['commit_rate']:.1f}%"
 
     return f"""
-    <a href="{esc(repo_url)}">
-      <rect x="{x}" y="{y}" width="{w}" height="{h}" rx="18" fill="#FFFFFF" stroke="#D0D7DE"/>
-      <text x="{x + 28}" y="{y + 42}" class="repo-title">{esc(repo['name'])}</text>
-      <text x="{x + 28}" y="{y + 70}" class="repo-sub">{esc(repo['full'])}</text>
+    <rect x="{x}" y="{y}" width="{w}" height="{h}" rx="22" fill="#FFFFFF" stroke="#D0D7DE"/>
 
-      <rect x="{x + 28}" y="{y + 92}" width="128" height="28" rx="14" fill="{color}" opacity="0.12"/>
-      <text x="{x + 92}" y="{y + 111}" text-anchor="middle" class="tag" fill="{color}">{esc(repo['level'])}</text>
+    <rect x="{x}" y="{y}" width="{w}" height="8" rx="4" fill="{color}"/>
 
-      <text x="{x + 170}" y="{y + 111}" class="role">{esc(repo['role'])}</text>
+    <text x="{x + 28}" y="{y + 48}" class="repo-title">{esc(repo['name'])}</text>
+    <text x="{x + 28}" y="{y + 75}" class="repo-path">{esc(repo['full'])}</text>
 
-      {bar(x + 28, y + 158, w - 56, 14, repo['commit_rate'], color, "Commit Share", commit_value)}
-      {bar(x + 28, y + 218, w - 56, 14, repo['change_rate'], color, "Code Change Share", change_value)}
-      {bar(x + 28, y + 278, w - 56, 14, repo['recent_rate'], color, f"Recent {RECENT_DAYS}-Day Commits", recent_value)}
+    <rect x="{x + 28}" y="{y + 94}" width="126" height="30" rx="15" fill="{accent}" stroke="{color}" stroke-opacity="0.25"/>
+    <text x="{x + 91}" y="{y + 115}" text-anchor="middle" class="level" fill="{color}">{esc(repo['level'])}</text>
 
-      <text x="{x + 28}" y="{y + 342}" class="small">
-        ★ {repo['stars']}   Forks {repo['forks']}   PRs {repo['my_prs']}   Issues {repo['my_issues']}
-      </text>
-      <text x="{x + 28}" y="{y + 368}" class="small-muted">
-        Last commit: {esc(repo['latest_time'])}
-      </text>
-    </a>
+    <text x="{x + 170}" y="{y + 115}" class="role">{esc(repo['role'])}</text>
+
+    {progress_bar(
+        x + 28,
+        y + 168,
+        w - 56,
+        16,
+        repo["commit_rate"],
+        color,
+        "Commit Share",
+        commit_value,
+    )}
+
+    {progress_bar(
+        x + 28,
+        y + 238,
+        w - 56,
+        16,
+        repo["change_rate"],
+        color,
+        "Code Change Share",
+        change_value,
+    )}
+
+    {metric_pill(
+        x + 28,
+        y + 304,
+        118,
+        "★",
+        str(repo["stars"]),
+        "#BF8700",
+        "#FFF8C5",
+    )}
+
+    {metric_pill(
+        x + 158,
+        y + 304,
+        142,
+        "Forks",
+        str(repo["forks"]),
+        "#57606A",
+        "#F6F8FA",
+    )}
+
+    {metric_pill(
+        x + 312,
+        y + 304,
+        w - 340,
+        "Contribution",
+        contribution_value,
+        color,
+        accent,
+    )}
+
+    <text x="{x + 28}" y="{y + 382}" class="last-commit">
+      Last commit: {esc(repo['latest_time'])}
+    </text>
     """
 
 
@@ -333,70 +356,85 @@ def render_svg(rows):
     jst = timezone(timedelta(hours=9))
     updated_at = datetime.now(jst).strftime("%Y-%m-%d %H:%M JST")
 
-    width = 1100
-    height = 520
+    width = 1120
+    height = 530
 
-    cards = []
-    card_w = 520
-    card_h = 400
-
-    cards.append(repo_card(rows[0], 30, 92, card_w, card_h))
-    cards.append(repo_card(rows[1], 550, 92, card_w, card_h))
+    card_w = 530
+    card_h = 410
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="Project Contribution Dashboard">
   <style>
     .title {{
-      font: 700 28px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font: 800 30px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       fill: #24292F;
     }}
+
     .subtitle {{
-      font: 400 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font: 500 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       fill: #57606A;
     }}
+
     .repo-title {{
-      font: 700 22px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font: 800 23px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       fill: #24292F;
     }}
-    .repo-sub {{
-      font: 400 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+    .repo-path {{
+      font: 500 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       fill: #57606A;
     }}
-    .tag {{
-      font: 700 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+    .level {{
+      font: 800 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     }}
+
     .role {{
-      font: 600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font: 700 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       fill: #57606A;
     }}
+
     .label {{
-      font: 600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font: 700 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       fill: #24292F;
     }}
-    .value {{
-      font: 500 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+    .bar-value {{
+      font: 600 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       fill: #57606A;
     }}
-    .small {{
-      font: 600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      fill: #24292F;
+
+    .pill-label {{
+      font: 800 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      fill: #57606A;
     }}
-    .small-muted {{
-      font: 400 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+    .pill-value {{
+      font: 800 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }}
+
+    .last-commit {{
+      font: 500 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      fill: #6E7781;
+    }}
+
+    .note {{
+      font: 500 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       fill: #6E7781;
     }}
   </style>
 
-  <rect x="0" y="0" width="{width}" height="{height}" rx="24" fill="#F6F8FA"/>
+  <rect x="0" y="0" width="{width}" height="{height}" rx="28" fill="#F6F8FA"/>
 
-  <text x="30" y="44" class="title">Project Contribution Dashboard</text>
-  <text x="30" y="70" class="subtitle">
+  <text x="32" y="48" class="title">Research Project Contribution</text>
+  <text x="32" y="76" class="subtitle">
     Auto-generated from default-branch Git history · Updated: {esc(updated_at)}
   </text>
 
-  {''.join(cards)}
+  {repo_card(rows[0], 30, 96, card_w, card_h)}
+  {repo_card(rows[1], 560, 96, card_w, card_h)}
 
-  <text x="30" y="507" class="small-muted">
-    Commit Share = matched author commits / total commits · Code Change Share = additions + deletions · Binary files ignored.
+  <text x="32" y="520" class="note">
+    Contribution = matched author commits / total commits. Code change = additions + deletions. Binary files are ignored.
   </text>
 </svg>
 """
@@ -408,9 +446,7 @@ def main():
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    rows = []
-    for repo in REPOS:
-        rows.append(collect_repo_stats(repo))
+    rows = [collect_repo_stats(repo) for repo in REPOS]
 
     svg = render_svg(rows)
     OUT_SVG.write_text(svg, encoding="utf-8")

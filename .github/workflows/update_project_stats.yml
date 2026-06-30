@@ -3,7 +3,6 @@ name: Update project contribution SVG
 on:
   workflow_dispatch:
   schedule:
-    # Every 6 hours. GitHub cron uses UTC.
     - cron: "20 5,11,17,23 * * *"
   push:
     paths:
@@ -32,9 +31,7 @@ jobs:
         run: python scripts/update_project_stats.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_USERNAME: "NOP1224"
           AUTHOR_REGEX: "NOP1224|Jiandong Jin|Jin Jiandong|jinjiandong|jiandong"
-          RECENT_DAYS: "90"
 
       - name: Commit updated SVG
         run: |
