@@ -18,7 +18,7 @@
   <img src="./assets/project_contributions.svg" width="100%" />
 </p>
 
----
+--- 
 
 ## Focus
 
