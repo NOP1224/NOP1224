@@ -15,7 +15,7 @@
 ---
 
 <p align="center">
-  <img src="./assets/project_contributions.svg" width="100%" />
+  <img src="./assets/project_contributions1.svg" width="100%" />
 </p>
 
 --- 
