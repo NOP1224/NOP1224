@@ -36,7 +36,7 @@ AUTHOR_REGEX = os.getenv(
 AUTHOR_RE = re.compile(AUTHOR_REGEX, re.IGNORECASE)
 
 OUT_DIR = Path("assets")
-OUT_SVG = OUT_DIR / "project_contributions1.svg"
+OUT_SVG = OUT_DIR / "project_contributions.svg"
 
 
 def run(cmd, cwd=None):
