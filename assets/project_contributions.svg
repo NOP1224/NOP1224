@@ -63,7 +63,7 @@
 
   <text x="32" y="48" class="title">Research Project Contribution</text>
   <text x="32" y="76" class="subtitle">
-    Auto-generated from default-branch Git history · Updated: 2026-11-15 15:37 JST
+    Auto-generated from default-branch Git history · Updated: 2026-11-22 15:53 JST
   </text>
 
   
@@ -98,7 +98,7 @@
     
     <rect x="58" y="400" width="118" height="42" rx="21" fill="#FFF8C5" stroke="#D0D7DE"/>
     <text x="78" y="426" class="pill-label">★</text>
-    <text x="158" y="427" text-anchor="end" class="pill-value" fill="#BF8700">36</text>
+    <text x="158" y="427" text-anchor="end" class="pill-value" fill="#BF8700">37</text>
     
 
     
@@ -132,24 +132,24 @@
 
     
     <text x="588" y="254" class="label">Commit Share</text>
-    <text x="1062" y="254" text-anchor="end" class="bar-value">160/451 (35.5%)</text>
+    <text x="1062" y="254" text-anchor="end" class="bar-value">162/453 (35.8%)</text>
 
     <rect x="588" y="264" width="474" height="16" rx="8" fill="#EAECEF"/>
-    <rect x="588" y="264" width="168.2" height="16" rx="8" fill="#1A7F37"/>
+    <rect x="588" y="264" width="169.5" height="16" rx="8" fill="#1A7F37"/>
     
 
     
     <text x="588" y="324" class="label">Code Change Share</text>
-    <text x="1062" y="324" text-anchor="end" class="bar-value">34,727/112,875 (30.8%)</text>
+    <text x="1062" y="324" text-anchor="end" class="bar-value">56,598/134,746 (42.0%)</text>
 
     <rect x="588" y="334" width="474" height="16" rx="8" fill="#EAECEF"/>
-    <rect x="588" y="334" width="145.8" height="16" rx="8" fill="#1A7F37"/>
+    <rect x="588" y="334" width="199.1" height="16" rx="8" fill="#1A7F37"/>
     
 
     
     <rect x="588" y="400" width="118" height="42" rx="21" fill="#FFF8C5" stroke="#D0D7DE"/>
     <text x="608" y="426" class="pill-label">★</text>
-    <text x="688" y="427" text-anchor="end" class="pill-value" fill="#BF8700">219</text>
+    <text x="688" y="427" text-anchor="end" class="pill-value" fill="#BF8700">220</text>
     
 
     
@@ -161,11 +161,11 @@
     
     <rect x="872" y="400" width="190" height="42" rx="21" fill="#DAFBE1" stroke="#D0D7DE"/>
     <text x="892" y="426" class="pill-label">Contribution</text>
-    <text x="1044" y="427" text-anchor="end" class="pill-value" fill="#1A7F37">35.5%</text>
+    <text x="1044" y="427" text-anchor="end" class="pill-value" fill="#1A7F37">35.8%</text>
     
 
     <text x="588" y="478" class="last-commit">
-      Last commit: 2026-10-28 20:25:13 +0800
+      Last commit: 2026-11-18 17:30:50 +0800
     </text>
     
 
